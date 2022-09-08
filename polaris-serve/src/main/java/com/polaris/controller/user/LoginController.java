@@ -1,5 +1,6 @@
 package com.polaris.controller.user;
 
+import cn.hutool.core.codec.Rot;
 import cn.hutool.json.JSONUtil;
 import com.polaris.api.user.LoginApi;
 import com.polaris.bo.UserTokenDetail;
@@ -43,7 +44,7 @@ public class LoginController implements LoginApi {
         if(user==null){
             return new ResponseEntity<>(RespBean.error("user does not exist!"), HttpStatus.UNAUTHORIZED);
         }
-        if(!user.getPassword().equals(login.getPassword())) {
+        if(!user.getPassword().equals(Rot.decode13(login.getPassword()))) {
             return new ResponseEntity<>(RespBean.error("password is error!"), HttpStatus.BAD_REQUEST);
         }
         LoginResponse loginResponse = new LoginResponse();
@@ -52,6 +53,7 @@ public class LoginController implements LoginApi {
         userTokenDetail.setUsername(user.getUsername());
         userTokenDetail.setRole(user.getRole());
         loginResponse.setToken(jwtTokenUtil.generatorToken(userTokenDetail));
+        loginResponse.setUserInfo(userService.getUserInfo(user.getUsername()));
         SysUserEventLog eventLog = new SysUserEventLog();
         eventLog.setUserId(user.getId());
         eventLog.setUserName(user.getUsername());

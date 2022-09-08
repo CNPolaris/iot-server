@@ -9,4 +9,5 @@ import lombok.Data;
 public class LoginResponse {
     private String header = "Bearer ";
     private String token;
+    private SysUserResponse userInfo;
 }
