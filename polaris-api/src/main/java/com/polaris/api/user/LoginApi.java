@@ -24,7 +24,7 @@ public interface LoginApi {
      */
     @ApiOperation(value = "登录", nickname = "login", notes = "", response = RespBean.class, tags={ "用户登录模块"})
     @ApiResponses(value = { @ApiResponse(code = 200, message = "成功", response = RespBean.class) })
-    @RequestMapping(value = "/api/login", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
+    @RequestMapping(value = "/login", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
     default ResponseEntity<RespBean> login(@ApiParam(value = ""  ) @RequestBody(required = true) LoginRequest login) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }

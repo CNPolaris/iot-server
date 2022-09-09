@@ -13,6 +13,7 @@ import com.polaris.entity.SysUser;
 import com.polaris.entity.SysUserEventLog;
 import com.polaris.event.UserEventLog;
 import com.polaris.service.SysUserService;
+import com.polaris.utils.Commons;
 import com.polaris.utils.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,10 +43,10 @@ public class LoginController implements LoginApi {
     public ResponseEntity<RespBean> login(LoginRequest login) {
         SysUser user = userService.login(login);
         if(user==null){
-            return new ResponseEntity<>(RespBean.error("user does not exist!"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(RespBean.error(Commons.CODE_NO_USER, Commons.ERROR_NO_USER), HttpStatus.OK);
         }
         if(!user.getPassword().equals(Rot.decode13(login.getPassword()))) {
-            return new ResponseEntity<>(RespBean.error("password is error!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(RespBean.error(Commons.CODE_NO_PASSWD, Commons.ERROR_NO_PASSWD), HttpStatus.OK);
         }
         LoginResponse loginResponse = new LoginResponse();
         UserTokenDetail userTokenDetail = new UserTokenDetail();

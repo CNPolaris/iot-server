@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * @author polaris
  */
-@WebFilter(filterName = "jwtFilter", urlPatterns = "/test/*")
+@WebFilter(filterName = "jwtFilter", urlPatterns = "/api/*")
 public class JwtFilter implements Filter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

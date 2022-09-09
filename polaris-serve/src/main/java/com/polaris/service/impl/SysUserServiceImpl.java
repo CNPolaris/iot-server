@@ -14,6 +14,7 @@ import com.polaris.entity.SysUserEventLog;
 import com.polaris.event.UserEventLog;
 import com.polaris.service.SysUserService;
 import com.polaris.mapper.SysUserMapper;
+import com.polaris.utils.Commons;
 import com.polaris.utils.JwtTokenUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
@@ -44,7 +45,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     @Override
     public SysUser login(LoginRequest request) {
         try{
-            QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("username", request.getUsername());
+            QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("username", request.getUsername()).eq("status", Commons.YES);
             return userMapper.selectOne(queryWrapper);
         } catch (Exception e){
             log.error(e.getMessage());
