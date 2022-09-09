@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-09T12:06:20.971+08:00[Asia/Shanghai]")
 public class NoteCreateRequest {
+    @JsonProperty("create_user")
+    private String createUser;
 
     @JsonProperty("tags")
     private List<String> tags = new ArrayList<>();

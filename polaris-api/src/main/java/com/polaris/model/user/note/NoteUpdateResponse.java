@@ -35,4 +35,7 @@ public class NoteUpdateResponse {
 
     @JsonProperty("reply_count")
     private String replyCount;
+
+    @JsonProperty("status")
+    private Integer status;
 }
