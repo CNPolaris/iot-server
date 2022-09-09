@@ -1,7 +1,7 @@
 package com.polaris.api.user;
 
-import com.polaris.dto.user.login.LoginRequest;
-import com.polaris.dto.user.login.RegisterRequest;
+import com.polaris.model.user.login.LoginRequest;
+import com.polaris.model.user.login.RegisterRequest;
 import com.polaris.entity.RespBean;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;

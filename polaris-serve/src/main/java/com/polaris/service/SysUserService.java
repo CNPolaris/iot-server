@@ -1,9 +1,8 @@
 package com.polaris.service;
 
-import com.polaris.dto.user.login.LoginRequest;
-import com.polaris.dto.user.login.LoginResponse;
-import com.polaris.dto.user.login.RegisterRequest;
-import com.polaris.dto.user.login.SysUserResponse;
+import com.polaris.model.user.login.LoginRequest;
+import com.polaris.model.user.login.RegisterRequest;
+import com.polaris.model.user.login.SysUserResponse;
 import com.polaris.entity.RespBean;
 import com.polaris.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;

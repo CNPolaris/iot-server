@@ -1,4 +1,4 @@
-package com.polaris.dto.user.log;
+package com.polaris.model.user.log;
 
 import lombok.Data;
 

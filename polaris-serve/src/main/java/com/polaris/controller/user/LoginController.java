@@ -4,10 +4,10 @@ import cn.hutool.core.codec.Rot;
 import cn.hutool.json.JSONUtil;
 import com.polaris.api.user.LoginApi;
 import com.polaris.bo.UserTokenDetail;
-import com.polaris.dto.user.login.LoginRequest;
-import com.polaris.dto.user.login.LoginResponse;
-import com.polaris.dto.user.login.RegisterRequest;
-import com.polaris.dto.user.login.SysUserResponse;
+import com.polaris.model.user.login.LoginRequest;
+import com.polaris.model.user.login.LoginResponse;
+import com.polaris.model.user.login.RegisterRequest;
+import com.polaris.model.user.login.SysUserResponse;
 import com.polaris.entity.RespBean;
 import com.polaris.entity.SysUser;
 import com.polaris.entity.SysUserEventLog;
@@ -16,14 +16,12 @@ import com.polaris.service.SysUserService;
 import com.polaris.utils.Commons;
 import com.polaris.utils.JwtTokenUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
