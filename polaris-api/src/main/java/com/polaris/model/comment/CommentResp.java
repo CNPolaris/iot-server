@@ -1,24 +1,14 @@
-package com.polaris.entity;
+package com.polaris.model.comment;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
- * 
- * @TableName mall_reply
+ * @author: polaris
  */
-@TableName(value ="mall_reply")
 @Data
-public class MallReply implements Serializable {
-    /**
-     * 
-     */
-    @TableId
+public class CommentResp {
     private String id;
 
     /**
@@ -30,6 +20,16 @@ public class MallReply implements Serializable {
      * 评论人Id
      */
     private String createUser;
+
+    /**
+     * 评论人nickName
+     */
+    private String createNickName;
+
+    /**
+     * 评论人头像
+     */
+    private String createUserAvatar;
 
     /**
      * 评论内容
@@ -56,6 +56,13 @@ public class MallReply implements Serializable {
      */
     private String parentCommentUser;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+    /**
+     * 被评论人nickName
+     */
+    private String parentNickName;
+
+    /**
+     * 被评论人头像
+     */
+    private String parentUserAvatar;
 }

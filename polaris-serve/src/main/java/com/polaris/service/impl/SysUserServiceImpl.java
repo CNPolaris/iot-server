@@ -95,6 +95,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         eventPublisher.publishEvent(new UserEventLog(eventLog));
         return RespBean.success("Register successful!!!");
     }
+
+    @Override
+    public SysUser getUserInfoById(String userId) {
+        return getById(userId);
+    }
 }
 
 

@@ -48,4 +48,6 @@ public class SysUserResponse {
 
     private Integer status;
 
+    private String avatar;
+
 }

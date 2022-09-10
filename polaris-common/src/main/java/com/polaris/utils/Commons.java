@@ -42,4 +42,13 @@ public class Commons {
      */
     public final static int CODE_NO_PASSWD = 604;
     public final static String ERROR_NO_PASSWD = "密码不正确";
+
+    /**
+     * 一级评论
+     */
+    public final static int COMMENT_ONE = 1;
+    /**
+     * 二级评论
+     */
+    public final static int COMMENT_TWO = 2;
 }

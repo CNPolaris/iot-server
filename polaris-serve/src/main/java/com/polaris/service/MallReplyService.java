@@ -2,6 +2,10 @@ package com.polaris.service;
 
 import com.polaris.entity.MallReply;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.polaris.model.comment.CommentCreateRequest;
+import com.polaris.model.comment.CommentListResponse;
+import com.polaris.model.comment.CommentTwoListResponse;
+import com.polaris.model.comment.CommentPageParam;
 
 /**
 * @author cntia
@@ -9,5 +13,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-09-09 17:18:43
 */
 public interface MallReplyService extends IService<MallReply> {
+    /**
+     * 创建评论
+     * @param request CommentCreateRequest
+     * @return MallReply
+     */
+    MallReply apiCommentCreate(CommentCreateRequest request);
 
+    /**
+     * 删除评论
+     * @param commentId String
+     * @return Boolean
+     */
+    Boolean apiCommentDelete(String commentId);
+
+    /**
+     * 获取评论列表
+     * @param param CommentPageParam
+     * @return CommentListResponse
+     */
+    CommentListResponse apiCommentList(CommentPageParam param);
 }
