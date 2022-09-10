@@ -3,6 +3,7 @@ package com.polaris.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.polaris.entity.MallNote;
@@ -71,18 +72,17 @@ public class MallNoteServiceImpl extends ServiceImpl<MallNoteMapper, MallNote>
     }
 
     @Override
-    public NoteGetListResponse apiNoteGetList(NoteGetListRequest request) {
+    public NoteGetListResponse apiNoteGetList(Page<MallNote> page, NoteGetListRequest request) {
         QueryWrapper<MallNote> queryWrapper = new QueryWrapper<>();
-        if(request.getNoteId()!=null){
+        if(request.getNoteId()!=null&&!request.getNoteId().isEmpty()){
             queryWrapper.eq("id", request.getNoteId());
         }
-        if(request.getTitle()!=null){
+        if(request.getTitle()!=null&&!request.getTitle().isEmpty()){
             queryWrapper.like("title",request.getTitle());
         }
-        if(request.getTags()!=null){
+        if(request.getTags()!=null&&!request.getTags().isEmpty()){
             queryWrapper.like("tags", request.getTags());
         }
-        Page<MallNote> page = new Page<>(request.getPage(), request.getLimit());
         mallNoteMapper.selectPage(page, queryWrapper);
         NoteGetListResponse response = new NoteGetListResponse();
         ArrayList<NoteListResponse> list = new ArrayList<>();
@@ -90,7 +90,7 @@ public class MallNoteServiceImpl extends ServiceImpl<MallNoteMapper, MallNote>
         records.forEach(note->{
             list.add(BeanUtil.copyProperties(note,NoteListResponse.class));
         });
-        response.setTotal(mallNoteMapper.selectCount(queryWrapper));
+        response.setTotal(page.getTotal());
         response.setList(list);
         return response;
     }

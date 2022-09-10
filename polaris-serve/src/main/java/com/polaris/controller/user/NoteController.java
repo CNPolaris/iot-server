@@ -1,6 +1,8 @@
 package com.polaris.controller.user;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.api.user.NoteApi;
+import com.polaris.entity.MallNote;
 import com.polaris.entity.RespBean;
 import com.polaris.model.user.note.*;
 import com.polaris.service.MallNoteService;
@@ -70,11 +72,10 @@ public class NoteController implements NoteApi {
                                                    @RequestParam(value = "title", required = false) String title,
                                                    @RequestParam(value = "tag", required = false) String tag) {
         NoteGetListRequest request = new NoteGetListRequest();
-        request.setLimit(limit);
-        request.setPage(page);
         request.setNoteId(noteId);
         request.setTags(tag);
         request.setTitle(title);
-        return new ResponseEntity<>(RespBean.success(mallNoteService.apiNoteGetList(request)),HttpStatus.OK);
+        Page<MallNote> objectPage = new Page<>(page,limit);
+        return new ResponseEntity<>(RespBean.success(mallNoteService.apiNoteGetList(objectPage,request)),HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.polaris.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.entity.MallNote;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.polaris.entity.RespBean;
@@ -45,8 +46,9 @@ public interface MallNoteService extends IService<MallNote> {
 
     /**
      * 笔记列表
+     * @param page Page
      * @param request NoteGetListRequest
      * @return NoteGetListResponse
      */
-    NoteGetListResponse apiNoteGetList(NoteGetListRequest request);
+    NoteGetListResponse apiNoteGetList(Page<MallNote> page, NoteGetListRequest request);
 }
