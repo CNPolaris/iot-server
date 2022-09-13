@@ -70,4 +70,25 @@ public interface CommentApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
+
+    /**
+     * GET /api/comment/personal : 获取用户个人评论的文章列表
+     *
+     * @param authorization  (required)
+     * @param limit  (optional)
+     * @param page  (optional)
+     * @return 成功 (status code 200)
+     */
+    @ApiOperation(value = "获取用户个人评论的文章列表", nickname = "apiCommentPersonalGet", notes = "", response = Object.class, tags={ "评论模块", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "成功", response = Object.class) })
+    @RequestMapping(value = "/api/comment/personal",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    default ResponseEntity<Object> apiCommentPersonalGet(@ApiParam(value = "" ,required=true) @RequestHeader(value="Authorization", required=true) String authorization,
+                                                         @ApiParam(value = "") @RequestParam(value = "limit", required = false, defaultValue = "") Long limit,
+                                                         @ApiParam(value = "") @RequestParam(value = "page", required = false, defaultValue = "1") Long page) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 }
