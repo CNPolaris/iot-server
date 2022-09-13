@@ -99,6 +99,8 @@ public interface ShopApi {
      * GET /api/shop : 查询闲置物品列表
      *
      * @param authorization  (required)
+     * @param limit Long
+     * @param page Long
      * @param title  (optional)
      * @param content  (optional)
      * @param price  (optional)
