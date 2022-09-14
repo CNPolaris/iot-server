@@ -86,7 +86,7 @@ public interface CommentApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     default ResponseEntity<Object> apiCommentPersonalGet(@ApiParam(value = "" ,required=true) @RequestHeader(value="Authorization", required=true) String authorization,
-                                                         @ApiParam(value = "") @RequestParam(value = "limit", required = false, defaultValue = "") Long limit,
+                                                         @ApiParam(value = "") @RequestParam(value = "limit", required = false, defaultValue = "20") Long limit,
                                                          @ApiParam(value = "") @RequestParam(value = "page", required = false, defaultValue = "1") Long page) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 

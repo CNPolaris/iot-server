@@ -19,4 +19,21 @@
         content,create_time,parent_reply_id,
         reply_level
     </sql>
+
+    <select id="getCommentedNoteList" parameterType="com.polaris.model.user.comment.CommentedNoteParam" resultType="com.polaris.model.user.comment.CommentedNoteResp">
+        SELECT note.id id, note.title title, reply.content comment
+        FROM mall_note note
+        LEFT JOIN mall_reply reply ON reply.note_id = note.id
+        <where>
+          and reply.create_user = #{userId}
+        </where>
+        LIMIT #{page}, #{limit}
+    </select>
+    <select id="getCommentNoteCount" resultType="java.lang.Long">
+        SELECT COUNT(reply.id)
+        FROM mall_reply reply
+        <where>
+            and reply.create_user = #{userId}
+        </where>
+    </select>
 </mapper>

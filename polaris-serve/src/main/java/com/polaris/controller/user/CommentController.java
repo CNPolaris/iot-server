@@ -6,15 +6,14 @@ import com.polaris.entity.RespBean;
 import com.polaris.model.user.comment.CommentCreateRequest;
 import com.polaris.model.user.comment.CommentListResponse;
 import com.polaris.model.user.comment.CommentPageParam;
+import com.polaris.model.user.comment.CommentedNoteParam;
 import com.polaris.service.MallReplyService;
 import com.polaris.utils.JwtTokenUtil;
+import com.polaris.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: polaris
@@ -48,5 +47,16 @@ public class CommentController implements CommentApi {
                                                  @RequestBody CommentPageParam model) {
         CommentListResponse response = mallReplyService.apiCommentList(model);
         return new ResponseEntity<>(RespBean.success(response),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Object> apiCommentPersonalGet(@RequestHeader(value="Authorization")String authorization,
+                                                        @RequestParam(value = "limit", required = false, defaultValue = "20") Long limit,
+                                                        @RequestParam(value = "page", required = false, defaultValue = "1") Long page) {
+        CommentedNoteParam param = new CommentedNoteParam();
+        param.setPage(PageUtil.getDbPage(page,limit));
+        param.setLimit(limit);
+        param.setUserId(jwtTokenUtil.getUserId(authorization));
+        return new ResponseEntity<>(RespBean.success(mallReplyService.getCommentedNoteList(param)),HttpStatus.OK);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
 * @author cntia
@@ -81,6 +82,15 @@ public class MallReplyServiceImpl extends ServiceImpl<MallReplyMapper, MallReply
             respComment.add(two);
         });
         response.setList(respComment);
+        return response;
+    }
+
+    @Override
+    public CommentedNoteResponse getCommentedNoteList(CommentedNoteParam param) {
+        CommentedNoteResponse response = new CommentedNoteResponse();
+        List<CommentedNoteResp> list = replyMapper.getCommentedNoteList(param);
+        response.setList(list);
+        response.setTotal(replyMapper.getCommentNoteCount(param.getUserId()));
         return response;
     }
 

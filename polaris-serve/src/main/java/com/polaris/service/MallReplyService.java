@@ -2,9 +2,7 @@ package com.polaris.service;
 
 import com.polaris.entity.MallReply;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.polaris.model.user.comment.CommentCreateRequest;
-import com.polaris.model.user.comment.CommentListResponse;
-import com.polaris.model.user.comment.CommentPageParam;
+import com.polaris.model.user.comment.*;
 
 /**
 * @author cntia
@@ -32,4 +30,11 @@ public interface MallReplyService extends IService<MallReply> {
      * @return CommentListResponse
      */
     CommentListResponse apiCommentList(CommentPageParam param);
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    CommentedNoteResponse getCommentedNoteList(CommentedNoteParam param);
 }
