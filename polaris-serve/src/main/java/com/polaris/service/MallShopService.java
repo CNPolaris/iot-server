@@ -2,10 +2,7 @@ package com.polaris.service;
 
 import com.polaris.entity.MallShop;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.polaris.model.user.shop.ShopCreateRequest;
-import com.polaris.model.user.shop.ShopCreateResponse;
-import com.polaris.model.user.shop.ShopDetailResp;
-import com.polaris.model.user.shop.ShopOverStatusResponse;
+import com.polaris.model.user.shop.*;
 
 /**
 * @author cntia
@@ -38,9 +35,32 @@ public interface MallShopService extends IService<MallShop> {
     ShopOverStatusResponse overShop(String shopId, Integer status);
 
     /**
+     * 更新闲置状态
+     * @param shopId String
+     * @param userId String
+     * @param request ShopUpdateRequest
+     * @return ShopDetailResp
+     */
+    ShopDetailResp shopUpdate(String shopId,String userId,ShopUpdateRequest request);
+    /**
      * 查询闲置详情
      * @param shopId String
      * @return ShopDetailResp
      */
     ShopDetailResp getShopDetail(String shopId);
+
+    /**
+     * 查询闲置列表
+     * @param param ShopListParam
+     * @return ShopListResponse
+     */
+    ShopListResponse getShopList(ShopListParam param);
+
+    /**
+     * 查询个人发布的闲置列表
+     * @param createUser String
+     * @param param ShopListParam
+     * @return ShopListResponse
+     */
+    ShopListResponse getShopPersonalList(String createUser, ShopListParam param);
 }
