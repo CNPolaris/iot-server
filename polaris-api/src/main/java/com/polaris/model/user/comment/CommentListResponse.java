@@ -1,4 +1,4 @@
-package com.polaris.model.comment;
+package com.polaris.model.user.comment;
 
 import lombok.Data;
 

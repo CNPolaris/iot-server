@@ -1,7 +1,7 @@
 package com.polaris.api.user;
 
-import com.polaris.model.comment.CommentCreateRequest;
-import com.polaris.model.comment.CommentPageParam;
+import com.polaris.model.user.comment.CommentCreateRequest;
+import com.polaris.model.user.comment.CommentPageParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;

@@ -51,4 +51,11 @@ public class Commons {
      * 二级评论
      */
     public final static int COMMENT_TWO = 2;
+
+    /**
+     * 联系方式类型
+     */
+    public final static int CONTACT_QQ = 1;
+    public final static int CONTACT_WECHAT = 2;
+    public final static int CONTACT_PHONE = 3;
 }

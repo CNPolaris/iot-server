@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.polaris.entity.MallReply;
 import com.polaris.entity.SysUser;
-import com.polaris.model.comment.*;
+import com.polaris.model.user.comment.*;
 import com.polaris.service.MallReplyService;
 import com.polaris.mapper.MallReplyMapper;
 import com.polaris.service.SysUserService;

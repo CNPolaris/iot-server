@@ -2,10 +2,9 @@ package com.polaris.service;
 
 import com.polaris.entity.MallReply;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.polaris.model.comment.CommentCreateRequest;
-import com.polaris.model.comment.CommentListResponse;
-import com.polaris.model.comment.CommentTwoListResponse;
-import com.polaris.model.comment.CommentPageParam;
+import com.polaris.model.user.comment.CommentCreateRequest;
+import com.polaris.model.user.comment.CommentListResponse;
+import com.polaris.model.user.comment.CommentPageParam;
 
 /**
 * @author cntia

@@ -1,7 +1,7 @@
 package com.polaris.api.user;
 
-import com.polaris.model.shop.ShopCreateRequest;
-import com.polaris.model.shop.ShopUpdateRequest;
+import com.polaris.model.user.shop.ShopCreateRequest;
+import com.polaris.model.user.shop.ShopUpdateRequest;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;

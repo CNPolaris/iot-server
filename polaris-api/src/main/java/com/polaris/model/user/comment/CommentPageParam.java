@@ -1,4 +1,4 @@
-package com.polaris.model.comment;
+package com.polaris.model.user.comment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
