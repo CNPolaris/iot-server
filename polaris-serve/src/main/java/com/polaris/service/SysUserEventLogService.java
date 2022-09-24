@@ -2,6 +2,7 @@ package com.polaris.service;
 
 import com.polaris.entity.SysUserEventLog;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.polaris.model.user.log.EventLogMessage;
 
 /**
 * @author cntia
@@ -15,4 +16,10 @@ public interface SysUserEventLogService extends IService<SysUserEventLog> {
      * @param request SysUserEventLog
      */
     void insertUserEventLog(SysUserEventLog request);
+
+    /**
+     * 插入操作日志
+     * @param message EventLogMessage
+     */
+    void insertEventLog(EventLogMessage message);
 }

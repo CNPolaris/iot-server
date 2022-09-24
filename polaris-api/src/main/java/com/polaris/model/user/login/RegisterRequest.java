@@ -10,4 +10,5 @@ public class RegisterRequest {
     private String password;
     private String email;
     private Integer role = 1;
+    private String avatar;
 }

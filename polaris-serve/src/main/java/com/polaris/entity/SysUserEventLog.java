@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.polaris.utils.Commons;
 import lombok.Data;
 
 /**
  * 
+ * @author polaris
  * @TableName sys_user_event_log
  */
 @TableName(value ="sys_user_event_log")
@@ -41,7 +44,7 @@ public class SysUserEventLog implements Serializable {
      */
     private Date createTime;
 
-    private Integer status = 1;
+    private Integer status = Commons.YES;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

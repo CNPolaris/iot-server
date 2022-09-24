@@ -83,10 +83,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         BeanUtils.copyProperties(request, sysUser);
         sysUser.setPassword(Rot.decode13(request.getPassword()));
         sysUser.setNickName(request.getUsername());
+        sysUser.setAvatar(request.getAvatar());
         Date date = new Date();
         sysUser.setCreateTime(date);
         sysUser.setUpdateTime(date);
         save(sysUser);
+        // 记录注册日志
         SysUserEventLog eventLog = new SysUserEventLog();
         eventLog.setUserId(sysUser.getId());
         eventLog.setUserName(sysUser.getUsername());

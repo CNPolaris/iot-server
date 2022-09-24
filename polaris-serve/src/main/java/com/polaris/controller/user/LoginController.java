@@ -4,14 +4,14 @@ import cn.hutool.core.codec.Rot;
 import cn.hutool.json.JSONUtil;
 import com.polaris.api.user.LoginApi;
 import com.polaris.bo.UserTokenDetail;
+import com.polaris.event.LogEvent;
+import com.polaris.model.user.log.EventLogMessage;
 import com.polaris.model.user.login.LoginRequest;
 import com.polaris.model.user.login.LoginResponse;
 import com.polaris.model.user.login.RegisterRequest;
 import com.polaris.model.user.login.SysUserResponse;
 import com.polaris.entity.RespBean;
 import com.polaris.entity.SysUser;
-import com.polaris.entity.SysUserEventLog;
-import com.polaris.event.UserEventLog;
 import com.polaris.service.SysUserService;
 import com.polaris.utils.Commons;
 import com.polaris.utils.JwtTokenUtil;
@@ -21,8 +21,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 /**
  * @author polaris
@@ -51,14 +49,14 @@ public class LoginController implements LoginApi {
         userTokenDetail.setId(user.getId());
         userTokenDetail.setUsername(user.getUsername());
         userTokenDetail.setRole(user.getRole());
-        loginResponse.setToken(jwtTokenUtil.generatorToken(userTokenDetail));
+        String token = jwtTokenUtil.generatorToken(userTokenDetail);
+        loginResponse.setToken(token);
         loginResponse.setUserInfo(userService.getUserInfo(user.getUsername()));
-        SysUserEventLog eventLog = new SysUserEventLog();
-        eventLog.setUserId(user.getId());
-        eventLog.setUserName(user.getUsername());
-        eventLog.setCreateTime(new Date());
-        eventLog.setContent(JSONUtil.toJsonStr(login));
-        eventPublisher.publishEvent(new UserEventLog(eventLog));
+        // 记录登录日志
+        EventLogMessage logMessage = new EventLogMessage();
+        logMessage.setToken(token);
+        logMessage.setContent(JSONUtil.toJsonStr(login));
+        eventPublisher.publishEvent(new LogEvent(logMessage));
         return new ResponseEntity<>(RespBean.success("login successful!", loginResponse),HttpStatus.OK);
     }
 
