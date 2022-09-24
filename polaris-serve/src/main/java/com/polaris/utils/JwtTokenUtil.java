@@ -85,6 +85,9 @@ public class JwtTokenUtil {
         String username;
         try{
             Claims claims = getClaimsFromToken(token);
+            if(claims==null){
+                return null;
+            }
             username = claims.getSubject();
         } catch (Exception e) {
             username = null;
@@ -116,6 +119,9 @@ public class JwtTokenUtil {
      */
     public boolean isTokenExpired(String token) {
         Date expiredDate = getExpiredDateFromToken(token);
+        if(expiredDate==null){
+            return false;
+        }
         return expiredDate.before(new Date());
     }
 
@@ -125,6 +131,9 @@ public class JwtTokenUtil {
      */
     private Date getExpiredDateFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
+        if(claims==null){
+            return null;
+        }
         return claims.getExpiration();
     }
 

@@ -35,7 +35,7 @@ public class JwtFilter implements Filter {
             response.setStatus(HttpServletResponse.SC_OK);
             chain.doFilter(request, response);
         } else {
-            if(token == null){
+            if(token.isEmpty()){
                 response.getWriter().write(JSONUtil.toJsonStr(RespBean.error(Commons.CODE_NO_TOKEN,Commons.ERROR_NO_TOKEN)));
                 return;
             }
