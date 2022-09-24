@@ -1,9 +1,9 @@
 package com.polaris.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.polaris.entity.MallNote;
@@ -37,6 +37,8 @@ public class MallNoteServiceImpl extends ServiceImpl<MallNoteMapper, MallNote>
         if(save(mallNote)){
             NoteCreateResponse response = new NoteCreateResponse();
             BeanUtil.copyProperties(mallNote, response);
+            response.setImages(JSONUtil.parseArray(mallNote.getImages()).toList(String.class));
+            response.setTags(JSONUtil.parseArray(mallNote.getTags()).toList(String.class));
             return response;
         }
         return null;
@@ -60,7 +62,10 @@ public class MallNoteServiceImpl extends ServiceImpl<MallNoteMapper, MallNote>
         mallNote.setImages(JSONUtil.toJsonStr(request.getImages()));
         mallNote.setStatus(request.getStatus());
         if(updateById(mallNote)){
-            return BeanUtil.copyProperties(mallNote,NoteUpdateResponse.class);
+            NoteUpdateResponse response = BeanUtil.copyProperties(mallNote, NoteUpdateResponse.class);
+            response.setImages(JSONUtil.parseArray(mallNote.getImages()).toList(String.class));
+            response.setTags(JSONUtil.parseArray(mallNote.getTags()).toList(String.class));
+            return response;
         }
         return null;
     }
@@ -88,7 +93,10 @@ public class MallNoteServiceImpl extends ServiceImpl<MallNoteMapper, MallNote>
         ArrayList<NoteListResponse> list = new ArrayList<>();
         List<MallNote> records = page.getRecords();
         records.forEach(note->{
-            list.add(BeanUtil.copyProperties(note,NoteListResponse.class));
+            NoteListResponse temp = BeanUtil.copyProperties(note, NoteListResponse.class);
+            temp.setTags(JSONUtil.parseArray(note.getTags()).toList(String.class));
+            temp.setImages(JSONUtil.parseArray(note.getImages()).toList(String.class));
+            list.add(temp);
         });
         response.setTotal(page.getTotal());
         response.setList(list);

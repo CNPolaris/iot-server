@@ -1,14 +1,17 @@
 package com.polaris.controller.user;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.api.user.NoteApi;
 import com.polaris.entity.MallNote;
 import com.polaris.entity.RespBean;
+import com.polaris.event.LogEvent;
+import com.polaris.model.user.log.EventLogMessage;
 import com.polaris.model.user.note.*;
 import com.polaris.service.MallNoteService;
 import com.polaris.utils.JwtTokenUtil;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,8 @@ public class NoteController implements NoteApi {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private MallNoteService mallNoteService;
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
     @Override
     public ResponseEntity<RespBean> apiNoteCreate(@RequestHeader(value = "Authorization") String authorization,
                                                   @RequestBody NoteCreateRequest body) {
@@ -29,6 +34,10 @@ public class NoteController implements NoteApi {
         body.setCreateUser(userId);
         NoteCreateResponse response = mallNoteService.apiNoteCreate(body);
         if (response!=null){
+            EventLogMessage message = new EventLogMessage();
+            message.setToken(authorization);
+            message.setContent(JSONUtil.toJsonStr(response));
+            eventPublisher.publishEvent(new LogEvent(message));
             return new ResponseEntity<>(RespBean.success(response), HttpStatus.OK);
         }
         return new ResponseEntity<>(RespBean.error("发表笔记失败"), HttpStatus.OK);
@@ -38,6 +47,10 @@ public class NoteController implements NoteApi {
     public ResponseEntity<RespBean> apiNoteDelete(@PathVariable(value = "note_id", required = true) String noteId,
                                                   @RequestHeader(value = "Authorization") String authorization) {
         if(mallNoteService.apiNoteDelete(noteId, jwtTokenUtil.getUserId(authorization))){
+            EventLogMessage message = new EventLogMessage();
+            message.setToken(authorization);
+            message.setContent(JSONUtil.toJsonStr(noteId));
+            eventPublisher.publishEvent(new LogEvent(message));
             return new ResponseEntity<>(RespBean.success("删除成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(RespBean.error("笔记不存在或无权删除"), HttpStatus.OK);
@@ -49,6 +62,10 @@ public class NoteController implements NoteApi {
                                                   @RequestBody NoteUpdateRequest body) {
         NoteUpdateResponse response = mallNoteService.apiNoteUpdate(noteId, jwtTokenUtil.getUserId(authorization), body);
         if(response!=null){
+            EventLogMessage message = new EventLogMessage();
+            message.setToken(authorization);
+            message.setContent(JSONUtil.toJsonStr(response));
+            eventPublisher.publishEvent(new LogEvent(message));
             return new ResponseEntity<>(RespBean.success("更新成功",response),HttpStatus.OK);
         }
         return new ResponseEntity<>(RespBean.error("更新失败"),HttpStatus.OK);
