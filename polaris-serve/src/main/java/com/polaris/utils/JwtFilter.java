@@ -4,8 +4,7 @@ package com.polaris.utils;
 import cn.hutool.json.JSONUtil;
 import com.polaris.entity.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -16,7 +15,7 @@ import java.io.IOException;
 /**
  * @author polaris
  */
-@WebFilter(filterName = "jwtFilter", urlPatterns = "/api/*")
+@WebFilter(filterName = "jwtFilter", urlPatterns = "/**/api/*")
 public class JwtFilter implements Filter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -35,16 +34,17 @@ public class JwtFilter implements Filter {
             response.setStatus(HttpServletResponse.SC_OK);
             chain.doFilter(request, response);
         } else {
-            if(token.isEmpty()){
+            if(token == null || token.isEmpty()){
                 response.getWriter().write(JSONUtil.toJsonStr(RespBean.error(Commons.CODE_NO_TOKEN,Commons.ERROR_NO_TOKEN)));
                 return;
             }
             else if(jwtTokenUtil.isTokenExpired(token)){
                response.getWriter().write(JSONUtil.toJsonStr(RespBean.error(Commons.CODE_TOKEN_EXPIRED,Commons.ERROR_TOKEN_EXPIRED)));
+               response.setStatus(404);
                return;
             }
             String username = jwtTokenUtil.getUserNameFromToken(token);
-            request.setAttribute("username", username);
+            request.setAttribute("email", username);
             request.setAttribute("id", jwtTokenUtil.getUserId(token));
             chain.doFilter(req,res);
         }

@@ -1,8 +1,8 @@
 package com.polaris.api.user;
 
-import com.polaris.model.user.login.LoginRequest;
 import com.polaris.model.user.login.RegisterRequest;
 import com.polaris.entity.RespBean;
+import com.polaris.model.user.login.UserLoginRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Api(value = "login", description = "the login API")
 public interface LoginApi {
     /**
-     * POST /login : 登录
-     *
-     * @param login  (optional)
-     * @return 成功 (status code 200)
-     */
-    @ApiOperation(value = "登录", nickname = "login", notes = "", response = RespBean.class, tags={ "用户登录模块"})
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "成功", response = RespBean.class) })
-    @RequestMapping(value = "/login", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    default ResponseEntity<RespBean> login(@ApiParam(value = ""  ) @RequestBody(required = true) LoginRequest login) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    /**
-     * POST /register : 用户注册
+     * POST /iot/register : 用户注册
      *
      * @param body  (optional)
      * @return 成功 (status code 200)
@@ -38,27 +25,29 @@ public interface LoginApi {
     @ApiOperation(value = "用户注册", nickname = "register", notes = "", response = RespBean.class, tags={ "用户登录模块"})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "成功", response = RespBean.class) })
-    @RequestMapping(value = "/register",
+    @RequestMapping(value = "/iot/register",
             produces = { "application/json" },
             consumes = { "application/json" },
             method = RequestMethod.POST)
-    default ResponseEntity<RespBean> register(@RequestBody(required = false) RegisterRequest body) {
+    default ResponseEntity<RespBean> register(@RequestBody(required = true) RegisterRequest body) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
-     * GET /api/userinfo : 获取用户自身的信息
+     * POST /iot/login : 用户登录
      *
-     * @param authorization  (optional)
+     * @param request  (UserLoginRequest)
      * @return 成功 (status code 200)
      */
-    @ApiOperation(value = "获取用户自身的信息", nickname = "getUserInfo", notes = "", response = RespBean.class, tags={ "用户登录模块"})
+    @ApiOperation(value = "用户登录", nickname = "iotLoginPost", notes = "", response = RespBean.class, tags={ "用户管理", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "成功", response = RespBean.class) })
-    @RequestMapping(value = "/api/userinfo",
+    @RequestMapping(value = "/iot/login",
             produces = { "application/json" },
-            method = RequestMethod.GET)
-    default ResponseEntity<RespBean> getUserInfo(@RequestHeader(value="Authorization", required=true) String authorization) {
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    default ResponseEntity<RespBean> iotLoginPost(@ApiParam(value = ""  ) @RequestBody(required = true)UserLoginRequest request) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
     }
 }

@@ -94,15 +94,25 @@ public class JwtTokenUtil {
         }
         return username;
     }
-    public String getUserId(String token){
-        String id;
+    public Long getUserId(String token){
+        Long id;
         try {
             Claims claims = getClaimsFromToken(token);
-            id = claims.getId();
+            id = Long.valueOf(claims.getId());
         }catch (Exception e){
             id = null;
         }
         return id;
+    }
+    public Integer getRole(String token){
+        Integer role;
+        try {
+            Claims claims = getClaimsFromToken(token);
+            role = (Integer) claims.get("role");
+        }catch (Exception e){
+            role = 1;
+        }
+        return role;
     }
     /**
      * 判断token是否有效
@@ -110,7 +120,7 @@ public class JwtTokenUtil {
      */
     public boolean validateToken(String token, UserTokenDetail userDetails) {
         String username = getUserNameFromToken(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return username.equals(userDetails.getEmail()) && !isTokenExpired(token);
     }
 
     /**
@@ -120,7 +130,7 @@ public class JwtTokenUtil {
     public boolean isTokenExpired(String token) {
         Date expiredDate = getExpiredDateFromToken(token);
         if(expiredDate==null){
-            return false;
+            return true;
         }
         return expiredDate.before(new Date());
     }
@@ -143,7 +153,7 @@ public class JwtTokenUtil {
      */
     public String generatorToken(UserTokenDetail userDetails) {
         Map<String,Object> claims = new HashMap<>(3);
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
+        claims.put(CLAIM_KEY_USERNAME, userDetails.getEmail());
         claims.put(CLAIM_KEY_ROLE, userDetails.getRole());
         claims.put(CLAIM_KEY_ID, userDetails.getId());
         claims.put(CLAIM_KEY_CREATED, new Date());

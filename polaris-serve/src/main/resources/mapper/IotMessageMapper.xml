@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.mapper.IotMessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.polaris.entity.IotMessage">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="body" column="body" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="equipmentId" column="equipment_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,body,create_time,
+        equipment_id
+    </sql>
+</mapper>

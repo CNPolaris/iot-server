@@ -10,25 +10,18 @@ import lombok.Data;
 
 
 /**
- * SysUserResponse
+ * UserLoginResponse
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-08T12:10:27.486+08:00[Asia/Shanghai]")
 @Data
-public class SysUserResponse   {
-  @JsonProperty("email")
-  private String email;
+public class UserLoginResponse   {
+  @JsonProperty("header")
+  private String header;
 
-  @JsonProperty("role")
-  private Integer role;
+  @JsonProperty("token")
+  private String token;
 
-  @JsonProperty("createTime")
-  private Date createTime;
-
-  @JsonProperty("updateTime")
-  private Date updateTime;
-
-  @JsonProperty("status")
-  private Integer status;
-
+  @JsonProperty("user_info")
+  private SysUserResponse userInfo;
 }
 

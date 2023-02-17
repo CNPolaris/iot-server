@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.mapper.IotEquipmentMapper">
+
+    <resultMap id="BaseResultMap" type="com.polaris.entity.IotEquipment">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="body" column="body" jdbcType="INTEGER"/>
+            <result property="paramTemplateId" column="param_template_id" jdbcType="BIGINT"/>
+            <result property="modbusBusadd" column="modbus_busadd" jdbcType="VARCHAR"/>
+            <result property="modbusFeaturesAddrStart" column="modbus_features_addr_start" jdbcType="VARCHAR"/>
+            <result property="modbusFeaturesAddrEnd" column="modbus_features_addr_end" jdbcType="VARCHAR"/>
+            <result property="modbusReadStart" column="modbus_read_start" jdbcType="VARCHAR"/>
+            <result property="modbusReadEnd" column="modbus_read_end" jdbcType="VARCHAR"/>
+            <result property="modbusCrcCheck" column="modbus_crc_check" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="gatewayId" column="gateway_id" jdbcType="BIGINT" />
+            <result property="modbusFeaturesCode" column="modbus_features_code" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,body,
+        param_template_id,modbus_busadd,modbus_features_addr_start,
+        modbus_features_addr_end,modbus_read_start,modbus_read_end,
+        modbus_crc_check,status,create_time, gateway_id, modbus_features_code
+    </sql>
+</mapper>

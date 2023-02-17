@@ -7,17 +7,17 @@ public class Commons {
     /**
      * 有效状态 1有效 0无效
      */
-    public final static int YES = 1;
-    public final static int NO = 0;
+    public final static int YES = 0;
+    public final static int NO = 1;
     /**
      * 成功
      */
-    public final static int SUCCESS_CODE = 1;
+    public final static int SUCCESS_CODE = 200;
     public final static String SUCCESS_MESSAGE = "Successful Response";
     /**
      * 失败
      */
-    public final static int ERROR_CODE = -1;
+    public final static int ERROR_CODE = 100;
     public final static String ERROR_MESSAGE = "ERROR";
 
     public final static int HALF_HOUR = 30*60;
@@ -58,4 +58,8 @@ public class Commons {
     public final static int CONTACT_QQ = 1;
     public final static int CONTACT_WECHAT = 2;
     public final static int CONTACT_PHONE = 3;
+
+    public final static int FREE_COUNT = 3;
+    public final static int STANDARD_COUNT = 100;
+    public final static int PRO_COUNT = 1000;
 }
