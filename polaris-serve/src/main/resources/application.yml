@@ -1,22 +1,18 @@
+# 项目相关配置
+iot:
+  # 名称
+  name: IotCloud
+  # 版本
+  version: 1.0
+  # 版权年份
+  copyrightYear: 2023
+
+# 开发环境配置
 spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    druid:
-      url: jdbc:mysql://imysql:3306/iot?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-      username: root
-      password: 123456
-      # 连接池的配置信息
-      # 初始化大小，最小，最大
-      initial-size: 5
-      min-idle: 5
-      maxActive: 20
-      # 配置获取连接等待超时的时间
-      maxWait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      timeBetweenEvictionRunsMillis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
-      minEvictableIdleTimeMillis: 300000
+  application:
+    name: iot-clouds
+  profiles:
+    active: dev
       
 jwt:
   tokenHeader: Authorization
