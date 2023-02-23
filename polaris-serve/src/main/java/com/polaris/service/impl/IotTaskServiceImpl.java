@@ -15,6 +15,7 @@ import com.polaris.utils.Commons;
 
 import cn.hutool.core.bean.BeanUtil;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,11 @@ import java.util.stream.Collectors;
 @Service
 public class IotTaskServiceImpl extends ServiceImpl<IotTaskMapper, IotTask>
         implements IotTaskService {
+    @Value("${iot-tcp.ip}")
+    private String iotIp;
+
+    @Value("${iot-tcp.port}")
+    private Integer iotPort;
 
     @Resource
     private IotTaskMapper taskMapper;
@@ -78,7 +84,7 @@ public class IotTaskServiceImpl extends ServiceImpl<IotTaskMapper, IotTask>
         QueryWrapper<IotTask> queryWrapper = new QueryWrapper<IotTask>().eq("id", taskId);
         IotTask iotTask = taskMapper.selectOne(queryWrapper);
         try {
-            Socket socket = new Socket("127.0.0.1", 9960);
+            Socket socket = new Socket(iotIp, iotPort);
             // 向服务器端发送数据
             OutputStream out = socket.getOutputStream();
             // 说明是任务命令

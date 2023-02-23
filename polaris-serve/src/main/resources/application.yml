@@ -3,7 +3,7 @@ iot:
   # 名称
   name: IotCloud
   # 版本
-  version: 1.0
+  version: 1.1
   # 版权年份
   copyrightYear: 2023
 
@@ -12,7 +12,7 @@ spring:
   application:
     name: iot-clouds
   profiles:
-    active: dev
+    active: prod
       
 jwt:
   tokenHeader: Authorization

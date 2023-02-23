@@ -25,3 +25,7 @@ mybatis-plus:
   type-aliases-package: com.polaris.entity
   configuration:
     map-underscore-to-camel-case: true
+
+iot-tcp:
+  ip: 127.0.0.1
+  port: 8888

@@ -1,11 +1,11 @@
 server:
-  port: 8888
+  port: 8080
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://imysql:3306/iot?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://106.55.191.65:3306/iot?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
       # 连接池的配置信息
@@ -19,3 +19,12 @@ spring:
       timeBetweenEvictionRunsMillis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       minEvictableIdleTimeMillis: 300000
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.polaris.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+iot-tcp:
+  ip: 106.55.191.65
+  port: 8888
