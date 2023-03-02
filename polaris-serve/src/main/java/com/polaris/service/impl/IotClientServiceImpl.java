@@ -40,6 +40,7 @@ public class IotClientServiceImpl extends ServiceImpl<IotGatewayMapper, IotGatew
             if(iotGateway.getProjectId().equals(iotProject.getId())){
                 AuthGatewayResponse gatewayResponse = new AuthGatewayResponse();
                 gatewayResponse.setGatewayId(iotGateway.getId());
+                gatewayResponse.setGatewayKey(iotGateway.getGatewayKey());
                 return RespBean.success("验证通过", gatewayResponse);
             } else {
                 return RespBean.error("网关密钥验证失败");
